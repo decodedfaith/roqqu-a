@@ -48,7 +48,6 @@ class _MainScreenState extends ConsumerState<MainScreen>
       ),
     );
 
-    // --- Content Animation (from 40% to 100% of the timeline) ---
     _contentFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _animationController,
@@ -65,8 +64,6 @@ class _MainScreenState extends ConsumerState<MainScreen>
 
   @override
   Widget build(BuildContext context) {
-    final selectedPageIndex = ref.watch(mainScreenIndexProvider);
-
     final isOverlayVisible = ref.watch(moreForYouVisibilityProvider);
     ref.listen<bool>(moreForYouVisibilityProvider, (previous, next) {
       if (next) {
