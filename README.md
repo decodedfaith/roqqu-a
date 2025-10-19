@@ -4,7 +4,7 @@ This is a Flutter-based mobile application built as a task-based assessment for 
 
 ## 🚀 Project Showcase
 
-*(This is where the video or GIF of your application in action will go. Instructions on how to add it are below.)*
+
 
 ![Project Demo GIF](link_to_your_gif_or_video.gif)
 
@@ -83,12 +83,6 @@ This ensures that the codebase remains stable and reliable throughout developmen
     flutter run
     ```
 
-## 📹 How to Add Your Demo Video/GIF
 
-1.  **Record Your Screen:** Use a tool like Kap, GIPHY Capture, or your phone's built-in screen recorder to create a short video or GIF of the app running in the simulator/emulator.
-2.  **Upload the GIF (Recommended):**
-    -   Drag and drop the GIF file directly into the issue or pull request description on GitHub. It will be uploaded and a link will be generated.
-    -   Copy the generated markdown link (it will look like `![filename](https://github-assets-url...)`).
-3.  **Update the README:** Paste the copied markdown link into the "Project Showcase" section of this `README.md` file.
 
 ---
