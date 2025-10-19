@@ -65,13 +65,6 @@ class _AnimatedMiddleButtonState extends ConsumerState<AnimatedMiddleButton>
                 colors: [Color(0xFF1D3573), Color(0xFF2764FF)],
                 end: Alignment.bottomRight,
               ),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.purple.withOpacity(0.4),
-              //     blurRadius: 10,
-              //     spreadRadius: 2,
-              //   ),
-              // ],
             ),
             child: Icon(
               shouldShowCloseIcon ? Icons.close : Icons.add,

@@ -189,9 +189,7 @@ class _ActionItem extends StatelessWidget {
           const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 13),
         ],
       ),
-      onTap: () {
-        /* TODO: Implement navigation for each item */
-      },
+      onTap: () {},
     );
   }
 }

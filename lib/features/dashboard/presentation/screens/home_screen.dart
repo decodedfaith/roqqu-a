@@ -9,8 +9,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double headerHeight = 350.0;
-
     return Scaffold(
       backgroundColor: Color(0xFF1C2127),
       body: Stack(

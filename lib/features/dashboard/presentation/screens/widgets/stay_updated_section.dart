@@ -108,13 +108,11 @@ class StayUpdatedSectionState extends State<StayUpdatedSection> {
     );
   }
 
-  // Helper method to add padding to each page
   Widget _buildPage(Widget child) {
     return Padding(padding: const EdgeInsets.only(right: 16), child: child);
   }
 }
 
-// A widget to build the page indicator dots
 class _PageIndicators extends StatelessWidget {
   final int itemCount;
   final int currentIndex;
