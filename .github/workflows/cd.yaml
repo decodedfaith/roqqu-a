@@ -1,0 +1,49 @@
+name: Flutter CD
+
+# --- Trigger ---
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build_and_release:
+    name: Build and Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checks out the repository code
+      - name: 📂 Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up the Flutter environment
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' # Use the same Flutter version
+          channel: 'stable'
+          cache: true
+
+      # Step 3: Installs dependencies
+      - name: 📦 Install dependencies
+        run: flutter pub get
+
+      # Step 4: Run build_runner to generate code before building the app
+      - name: ⚙️ Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # Step 5: Builds the Android APK
+      # The output will be in 'build/app/outputs/flutter-apk/app-release.apk'
+      - name: 🚀 Build APK
+        run: flutter build apk --release
+
+      # Step 6: Creates a new GitHub Release and uploads the APK as an asset
+      - name: 🎉 Create Release and Upload APK
+        uses: softprops/action-gh-release@v1
+        with:
+          # This token is automatically provided by GitHub
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # The body of the release will be populated with your Git commit messages
+          generate_release_notes: true
+          # The files to upload to the release
+          files: build/app/outputs/flutter-apk/app-release.apk

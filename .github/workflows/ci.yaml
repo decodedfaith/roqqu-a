@@ -1,0 +1,44 @@
+name: Flutter CI
+
+# --- Trigger ---
+# This workflow runs on every push or pull request to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# --- Jobs ---
+# A workflow is made up of one or more jobs that run in parallel or sequentially
+jobs:
+  # This job is named 'build_and_test'
+  build_and_test:
+    name: Build, Analyze & Test
+    # The type of virtual machine to run the job on. 'ubuntu-latest' is standard.
+    runs-on: ubuntu-latest
+
+    # The sequence of tasks that the job will execute
+    steps:
+      # Step 1: Checks out your repository code so the workflow can access it
+      - name: 📂 Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up the Flutter environment on the virtual machine
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' 
+          channel: 'stable'
+          cache: true 
+
+      # Step 3: Installs your project's dependencies
+      - name: 📦 Install dependencies
+        run: flutter pub get
+
+      # Step 4: Runs the Dart code analyzer to check for errors and warnings
+      - name: 🔍 Analyze project source
+        run: flutter analyze
+
+      # Step 5: Runs all your unit and widget tests
+      - name: ✅ Run tests
+        run: flutter test
