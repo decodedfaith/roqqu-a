@@ -1,18 +1,13 @@
-
-///`Trade`
-///Represents a single trading operation. This model is versatile and can be used for a pro trader's history, the user's current trades, and the user's trade history.
-
-
 class Trade {
   final String id;
-  final String tradingPair; // e.g., "BTCUSDT"
-  final double leverage; // e.g., 10x
+  final String tradingPair;
+  final double leverage;
   final double entryPrice;
-  final double? exitPrice; // Nullable for open trades
+  final double? exitPrice;
   final DateTime entryTime;
-  final DateTime? exitTime; // Nullable for open trades
+  final DateTime? exitTime;
   final double roi;
-  final String proTraderName; // To identify who made the trade
+  final String proTraderName;
   final String proTraderAvatarUrl;
 
   Trade({

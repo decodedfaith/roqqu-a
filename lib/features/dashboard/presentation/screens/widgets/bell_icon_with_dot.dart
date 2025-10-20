@@ -12,16 +12,16 @@ class BellIconWithDot extends StatelessWidget {
     this.icon,
     this.svgIcon,
     required this.blackOutline,
-  }) : assert(svgIcon != null || icon != null),
-       assert(svgIcon == null || icon == null);
+  })  : assert(svgIcon != null || icon != null),
+        assert(svgIcon == null || icon == null);
 
   @override
   Widget build(BuildContext context) {
     Widget? iconWidget;
 
     SvgTheme theme = blackOutline == true
-        ? SvgTheme(currentColor: Color(0xFF1C2127))
-        : SvgTheme();
+        ? const SvgTheme(currentColor: Color(0xFF1C2127))
+        : const SvgTheme();
 
     if (svgIcon != null && svgIcon!.isNotEmpty) {
       iconWidget = SvgPicture.asset(
@@ -43,7 +43,7 @@ class BellIconWithDot extends StatelessWidget {
           child: Container(
             width: 6,
             height: 6,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.red,
               shape: BoxShape.circle,
             ),
