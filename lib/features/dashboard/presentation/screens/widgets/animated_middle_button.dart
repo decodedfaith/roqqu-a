@@ -59,9 +59,9 @@ class _AnimatedMiddleButtonState extends ConsumerState<AnimatedMiddleButton>
             CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
           ),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                 colors: [Color(0xFF1D3573), Color(0xFF2764FF)],
                 end: Alignment.bottomRight,
               ),

@@ -35,7 +35,7 @@ class _BalanceSectionState extends State<BalanceSection> {
                   _isBalanceVisible
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: Color(0xFFA7B1BC),
+                  color: const Color(0xFFA7B1BC),
                 ),
                 onPressed: _toggleVisibility,
                 constraints: const BoxConstraints(),
@@ -44,7 +44,6 @@ class _BalanceSectionState extends State<BalanceSection> {
             ),
           ],
         ),
-
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           transitionBuilder: (Widget child, Animation<double> animation) {
@@ -53,8 +52,8 @@ class _BalanceSectionState extends State<BalanceSection> {
           child: _isBalanceVisible
               ? RichText(
                   key: const ValueKey<String>('visible_balance'),
-                  text: TextSpan(
-                    style: const TextStyle(
+                  text: const TextSpan(
+                    style: TextStyle(
                       fontFamily: 'Encode Sans',
                       color: Color(0xFFFFFFFF),
                       fontWeight: FontWeight.w800,
@@ -62,8 +61,8 @@ class _BalanceSectionState extends State<BalanceSection> {
                       height: 1.25,
                     ),
                     children: <TextSpan>[
-                      const TextSpan(text: '£0'),
-                      const TextSpan(
+                      TextSpan(text: '£0'),
+                      TextSpan(
                         text: '.00',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,

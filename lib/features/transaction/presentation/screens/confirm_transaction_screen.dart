@@ -21,12 +21,12 @@ class ConfirmTransactionScreen extends StatelessWidget {
                   'Confirm Transaction',
                   style: AppTheme.textTheme.headlineLarge,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Input your 6 digit transaction PIN',
                   style: AppTheme.textTheme.bodyMedium,
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 // TODO: Build the PIN input dots widget (e.g., using the `pinput` package)
               ],
             ),

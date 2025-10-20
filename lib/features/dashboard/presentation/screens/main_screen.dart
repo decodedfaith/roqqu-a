@@ -75,7 +75,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
 
     return PopScope(
       canPop: !isOverlayVisible,
-      onPopInvokedWithResult: (didPop, result) {
+      // ignore: deprecated_member_use
+      onPopInvoked: (bool didPop) {
         if (!didPop && isOverlayVisible) {
           ref.read(moreForYouVisibilityProvider.notifier).hide();
         }
@@ -85,7 +86,6 @@ class _MainScreenState extends ConsumerState<MainScreen>
         body: Stack(
           children: [
             _pages[ref.watch(mainScreenIndexProvider)],
-
             IgnorePointer(
               ignoring: !isOverlayVisible,
               child: AnimatedOpacity(
@@ -94,22 +94,20 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 child: GestureDetector(
                   onTap: () =>
                       ref.read(moreForYouVisibilityProvider.notifier).hide(),
-                  child: Container(color: Colors.black.withValues(alpha: 0.6)),
+                  // ignore: deprecated_member_use
+                  child: Container(color: Colors.black.withOpacity(0.6)),
                 ),
               ),
             ),
-
             Positioned(
               bottom: 0,
-
               left: 16,
               right: 16,
               child: AnimatedBuilder(
                 animation: _animationController,
                 builder: (context, child) {
                   return Visibility(
-                    visible:
-                        _animationController.status !=
+                    visible: _animationController.status !=
                         AnimationStatus.dismissed,
                     child: Transform.scale(
                       scale: _containerScaleAnimation.value,

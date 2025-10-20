@@ -15,8 +15,8 @@ class NotificationCard extends StatelessWidget {
     this.icon,
     this.svgIcon,
     this.showBadge = false,
-  }) : assert(svgIcon != null || icon != null),
-       assert(svgIcon == null || icon == null);
+  })  : assert(svgIcon != null || icon != null),
+        assert(svgIcon == null || icon == null);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,6 @@ class NotificationCard extends StatelessWidget {
       child: Row(
         children: [
           if (iconWidget != null) ...[iconWidget, const SizedBox(width: 16)],
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +63,6 @@ class NotificationCard extends StatelessWidget {
               ],
             ),
           ),
-
           if (showBadge)
             const Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -84,6 +82,7 @@ class _UrgentNoticeBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
       decoration: BoxDecoration(
+        // ignore: deprecated_member_use
         color: const Color(0xFFFF554A).withOpacity(0.08),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(8),

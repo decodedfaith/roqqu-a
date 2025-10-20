@@ -30,7 +30,7 @@ class MoreForYouSheet extends StatelessWidget {
               children: [
                 Flexible(
                   child: ListView(
-                    children: [
+                    children: const [
                       _Section(
                         title: 'Trade',
                         items: [
@@ -67,7 +67,7 @@ class MoreForYouSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       _Section(
                         title: 'Earn',
                         items: [
@@ -95,8 +95,8 @@ class MoreForYouSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      const SizedBox(height: 5),
+                      SizedBox(height: 16),
+                      SizedBox(height: 5),
                     ],
                   ),
                 ),
@@ -177,7 +177,8 @@ class _ActionItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: Color(0xFFF79009).withValues(alpha: 0.12),
+                // ignore: deprecated_member_use
+                color: const Color(0xFFF79009).withOpacity(0.12),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(

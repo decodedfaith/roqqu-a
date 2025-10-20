@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1C2127),
+      backgroundColor: const Color(0xFF1C2127),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 125),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -27,14 +27,14 @@ class HomeScreen extends StatelessWidget {
                       const BalanceSection(),
                       const SizedBox(height: 12),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Color(0xFF262932),
+                          color: const Color(0xFF262932),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 5,
                             vertical: 16,
                           ),
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFF262932),
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(11),
@@ -92,10 +92,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 24),
-                      _CopyTradingCard(),
-                      SizedBox(height: 24),
-                      Row(
+                      const SizedBox(height: 24),
+                      const _CopyTradingCard(),
+                      const SizedBox(height: 24),
+                      const Row(
                         children: [
                           Text(
                             "Stay Updated",
@@ -108,10 +108,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
-                      StayUpdatedSection(),
-                      SizedBox(height: 24),
-                      _ListedCoinsSection(),
+                      const SizedBox(height: 8),
+                      const StayUpdatedSection(),
+                      const SizedBox(height: 24),
+                      const _ListedCoinsSection(),
                       // SizedBox(height: 100),
                     ],
                   ),
@@ -119,7 +119,6 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-
           const Positioned(top: 0, left: 0, right: 0, child: _HeaderContent()),
         ],
       ),
@@ -160,7 +159,8 @@ class _HeaderContent extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(2.5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withValues(alpha: 0.3),
+                        // ignore: deprecated_member_use
+                        color: Colors.grey.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
@@ -169,7 +169,8 @@ class _HeaderContent extends StatelessWidget {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.9),
+                          // ignore: deprecated_member_use
+                          color: Colors.white.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Row(
@@ -185,7 +186,6 @@ class _HeaderContent extends StatelessWidget {
                             SizedBox(width: 8),
                             SizedBox(
                               width: 16,
-
                               child: Icon(
                                 Icons.keyboard_arrow_down,
                                 size: 20,
@@ -203,7 +203,7 @@ class _HeaderContent extends StatelessWidget {
                         const SizedBox(width: 16),
                         SvgPicture.asset("assets/icons/headphones.svg"),
                         const SizedBox(width: 16),
-                        BellIconWithDot(
+                        const BellIconWithDot(
                           svgIcon: "assets/icons/bNotification.svg",
                           blackOutline: true,
                         ),
@@ -211,7 +211,8 @@ class _HeaderContent extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: Colors.grey.withValues(alpha: 0.3),
+                            // ignore: deprecated_member_use
+                            color: Colors.grey.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Row(
@@ -231,7 +232,6 @@ class _HeaderContent extends StatelessWidget {
                   ],
                 ),
               ),
-
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
                 decoration: const BoxDecoration(
@@ -278,7 +278,6 @@ class _ActionButton extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-
         Text(
           label,
           style: const TextStyle(
@@ -302,7 +301,6 @@ class _CopyTradingCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // TODO: Implement navigation to the "Intro" screen.
-        print('Copy Trading card tapped!');
       },
       child: Stack(
         clipBehavior: Clip.none,
@@ -335,14 +333,14 @@ class _CopyTradingCard extends StatelessWidget {
                   ],
                 ),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Copy Trading',
                           style: TextStyle(
                             fontFamily: 'Encode Sans',
@@ -352,7 +350,7 @@ class _CopyTradingCard extends StatelessWidget {
                             height: 1.5,
                           ),
                         ),
-                        const Text(
+                        Text(
                           'Discover our latest feature. Follow and watch the PRO traders closely and win like a PRO! We are rooting for you!',
                           style: TextStyle(
                             fontFamily: 'Inter',
@@ -365,12 +363,11 @@ class _CopyTradingCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 100),
+                  SizedBox(width: 100),
                 ],
               ),
             ),
           ),
-
           Positioned(
             right: 8,
             bottom: -2,
@@ -473,7 +470,7 @@ class _ListedCoinsSection extends StatelessWidget {
                     children: [
                       SvgPicture.asset("assets/icons/ethereumIcon.svg"),
                       const SizedBox(width: 16),
-                      Column(
+                      const Column(
                         children: [
                           Text(
                             'Bitcoin',
@@ -497,7 +494,7 @@ class _ListedCoinsSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text("\$22,840", style: TextStyle(color: Colors.white)),
+                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -545,7 +542,7 @@ class _ListedCoinsSection extends StatelessWidget {
                     children: [
                       SvgPicture.asset("assets/icons/ethereumIcon.svg"),
                       const SizedBox(width: 16),
-                      Column(
+                      const Column(
                         children: [
                           Text(
                             'Bitcoin',
@@ -569,7 +566,7 @@ class _ListedCoinsSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text("\$22,840", style: TextStyle(color: Colors.white)),
+                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
                 ],
               ),
             ],

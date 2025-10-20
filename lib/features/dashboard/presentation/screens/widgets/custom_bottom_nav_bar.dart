@@ -24,6 +24,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                 color: const Color(0xFF1A1A1A),
                 border: Border(
                   top: BorderSide(
+                    // ignore: deprecated_member_use
                     color: Colors.grey.withOpacity(0.2),
                     width: 1,
                   ),
@@ -82,14 +83,13 @@ class CustomBottomNavBar extends ConsumerWidget {
     final selectedIndex = ref.watch(mainScreenIndexProvider);
     final isSelected = selectedIndex == index;
 
-    final Color activeColor = Colors.blueAccent;
-    final Color inactiveColor = Colors.grey;
+    const Color activeColor = Colors.blueAccent;
+    const Color inactiveColor = Colors.grey;
 
     final Widget iconWidget = SvgPicture.asset(
       assetName,
       width: 24,
       height: 24,
-
       colorFilter: ColorFilter.mode(
         isSelected ? activeColor : inactiveColor,
         BlendMode.srcIn,
@@ -132,7 +132,6 @@ class CustomBottomNavBar extends ConsumerWidget {
             )
           else
             iconWidget,
-
           const SizedBox(height: 4),
           Text(
             label,
