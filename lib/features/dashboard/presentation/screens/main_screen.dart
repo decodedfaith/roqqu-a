@@ -75,7 +75,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
 
     return PopScope(
       canPop: !isOverlayVisible,
-      onPopInvokedWithResult: (didPop, result) {
+      // ignore: deprecated_member_use
+      onPopInvoked: (bool didPop) {
         if (!didPop && isOverlayVisible) {
           ref.read(moreForYouVisibilityProvider.notifier).hide();
         }
