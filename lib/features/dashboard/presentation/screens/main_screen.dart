@@ -85,7 +85,6 @@ class _MainScreenState extends ConsumerState<MainScreen>
         body: Stack(
           children: [
             _pages[ref.watch(mainScreenIndexProvider)],
-
             IgnorePointer(
               ignoring: !isOverlayVisible,
               child: AnimatedOpacity(
@@ -98,18 +97,15 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 ),
               ),
             ),
-
             Positioned(
               bottom: 0,
-
               left: 16,
               right: 16,
               child: AnimatedBuilder(
                 animation: _animationController,
                 builder: (context, child) {
                   return Visibility(
-                    visible:
-                        _animationController.status !=
+                    visible: _animationController.status !=
                         AnimationStatus.dismissed,
                     child: Transform.scale(
                       scale: _containerScaleAnimation.value,
