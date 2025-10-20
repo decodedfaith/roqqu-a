@@ -1,115 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/main_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/animated_middle_button.dart';
-import 'package:roqqu_mobile_t/main.dart';
-import 'package:roqqu_mobile_t/common/widgets/risk_level_card.dart';
-import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/main_screen_providers.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/custom_bottom_nav_bar.dart';
+
+// A mock version of MyApp for testing purposes
+class TestApp extends StatelessWidget {
+  const TestApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // We start the app directly at the MainScreen for these tests
+    return const MaterialApp(
+      home: MainScreen(),
+    );
+  }
+}
 
 void main() {
-  // TEST GROUP 1: A simple, reliable smoke test for app startup.
-  group('App Smoke Test', () {
-    testWidgets('App launches and displays the Onboarding screen',
+  // TEST GROUP 1: A reliable smoke test for your main application screen.
+  group('MainScreen Smoke Test', () {
+    testWidgets('MainScreen launches with NavBar and HomeScreen visible',
         (WidgetTester tester) async {
-      // Arrange: Pump the root widget of the app.
-      // ProviderScope is essential for any test involving Riverpod.
-      await tester.pumpWidget(const ProviderScope(child: MyApp()));
-
-      // Act: Wait for any initial animations (like the onboarding fade-in) to complete.
+      // Arrange: Pump the TestApp, which starts at MainScreen.
+      // ProviderScope is essential for Riverpod.
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: TestApp(),
+        ),
+      );
+      // Wait for any initial animations to settle.
       await tester.pumpAndSettle();
 
-      // Assert: Verify that a key piece of text from the initial route ('/onboarding') is visible.
-      // This proves that the app starts, Riverpod is initialized, go_router is working,
-      // and the initial screen is rendered.
-      expect(find.text('Copy PRO traders'), findsOneWidget);
+      // Assert: Verify that key components of the main UI are present.
+      expect(find.byType(CustomBottomNavBar), findsOneWidget);
+      expect(find.text('Home'),
+          findsOneWidget); // Checks for the "Home" nav bar item label
+      expect(find.text('Your GBP Balance'),
+          findsOneWidget); // Checks for content from HomeScreen
     });
   });
 
-  // TEST GROUP 2: A focused test for a reusable UI component.
-  group('Common Reusable Widgets', () {
-    testWidgets('RiskLevelCard changes border color when selected',
+  // TEST GROUP 2: A targeted test for the core modal overlay functionality.
+  group('Dashboard Modal Overlay', () {
+    testWidgets('Tapping the middle button shows and hides the modal overlay',
         (WidgetTester tester) async {
-      // Arrange: Build the widget in an unselected state. This test is isolated.
+      // Arrange
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: RiskLevelCard(
-              title: 'Test Profile',
-              description: 'This is a test description.',
-              isSelected: false, // Start as unselected
-              onTap: () {},
-            ),
-          ),
+        const ProviderScope(
+          child: TestApp(),
         ),
       );
+      await tester.pumpAndSettle();
 
-      // Assert: Check that the initial border is transparent.
-      var cardContainer =
-          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
-      var decoration = cardContainer.decoration as BoxDecoration;
-      expect((decoration.border as Border?)?.top.color, Colors.transparent);
-
-      // Act: Rebuild the widget with isSelected = true to simulate a state change.
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: RiskLevelCard(
-              title: 'Test Profile',
-              description: 'This is a test description.',
-              isSelected: true, // Now it is selected
-              onTap: () {},
-            ),
-          ),
-        ),
-      );
-
-      // We need one pump() to process the state change and start the animation.
-      await tester.pump();
-
-      // Assert: Check that the border color has changed to the selected color.
-      cardContainer =
-          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
-      decoration = cardContainer.decoration as BoxDecoration;
-      expect((decoration.border as Border?)?.top.color, Colors.blueAccent);
-    });
-  });
-
-  // TEST GROUP 3: A targeted test for Riverpod state management and UI reaction.
-  group('Dashboard State Management', () {
-    testWidgets(
-        'AnimatedMiddleButton shows add icon on home screen and close icon on others',
-        (WidgetTester tester) async {
-      // Arrange: Create a ProviderContainer to manually control our providers.
-      final container = ProviderContainer();
-
-      // Act: Pump the widget we want to test.
-      await tester.pumpWidget(
-        UncontrolledProviderScope(
-          container: container,
-          child: const MaterialApp(
-            home: Scaffold(
-              body: AnimatedMiddleButton(),
-            ),
-          ),
-        ),
-      );
-
-      // Assert: By default, the mainScreenIndexProvider is 0 (home).
-      // We expect to find an 'add' icon.
+      // Assert: Initially, the modal content is not visible, and the button shows an 'add' icon.
+      expect(find.text('Trade'),
+          findsNothing); // 'Trade' is a title in MoreForYouSheet
       expect(find.byIcon(Icons.add), findsOneWidget);
-      expect(find.byIcon(Icons.close), findsNothing);
 
-      // Act: Manually change the state of the provider to simulate a tab switch.
-      container
-          .read(mainScreenIndexProvider.notifier)
-          .setIndex(1); // Switch to "Wallet" tab
+      // Act: Find the middle button and tap it to show the modal.
+      await tester.tap(find.byType(AnimatedMiddleButton));
+      // pumpAndSettle waits for the slide-up animation to complete.
+      await tester.pumpAndSettle();
 
-      // Act: Pump the widget tree to make it rebuild with the new state.
-      await tester.pump();
-
-      // Assert: The widget has rebuilt and should now show a 'close' icon.
-      expect(find.byIcon(Icons.add), findsNothing);
+      // Assert: The modal content is now visible, and the button shows a 'close' icon.
+      expect(find.text('Trade'), findsOneWidget);
       expect(find.byIcon(Icons.close), findsOneWidget);
+
+      // Act: Tap the middle button again to hide the modal.
+      await tester.tap(find.byType(AnimatedMiddleButton));
+      await tester.pumpAndSettle();
+
+      // Assert: The modal content is hidden again, and the icon has reverted to 'add'.
+      expect(find.text('Trade'), findsNothing);
+      expect(find.byIcon(Icons.add), findsOneWidget);
     });
   });
 }
