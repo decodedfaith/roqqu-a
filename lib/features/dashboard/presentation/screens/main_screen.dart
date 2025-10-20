@@ -94,7 +94,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 child: GestureDetector(
                   onTap: () =>
                       ref.read(moreForYouVisibilityProvider.notifier).hide(),
-                  child: Container(color: Colors.black.withValues(alpha: 0.6)),
+                  // ignore: deprecated_member_use
+                  child: Container(color: Colors.black.withOpacity(0.6)),
                 ),
               ),
             ),

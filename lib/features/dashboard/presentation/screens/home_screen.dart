@@ -159,7 +159,8 @@ class _HeaderContent extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(2.5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withValues(alpha: 0.3),
+                        // ignore: deprecated_member_use
+                        color: Colors.grey.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
@@ -168,7 +169,8 @@ class _HeaderContent extends StatelessWidget {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.9),
+                          // ignore: deprecated_member_use
+                          color: Colors.white.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Row(
@@ -209,7 +211,8 @@ class _HeaderContent extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: Colors.grey.withValues(alpha: 0.3),
+                            // ignore: deprecated_member_use
+                            color: Colors.grey.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Row(

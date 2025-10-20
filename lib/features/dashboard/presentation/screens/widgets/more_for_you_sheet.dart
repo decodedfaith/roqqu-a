@@ -177,7 +177,8 @@ class _ActionItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: const Color(0xFFF79009).withValues(alpha: 0.12),
+                // ignore: deprecated_member_use
+                color: const Color(0xFFF79009).withOpacity(0.12),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(

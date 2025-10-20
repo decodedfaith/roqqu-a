@@ -82,7 +82,8 @@ class _UrgentNoticeBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFFFF554A).withValues(alpha: 0.08),
+        // ignore: deprecated_member_use
+        color: const Color(0xFFFF554A).withOpacity(0.08),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(8),
           bottomLeft: Radius.circular(8),

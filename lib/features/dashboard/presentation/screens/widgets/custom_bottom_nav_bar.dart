@@ -24,7 +24,8 @@ class CustomBottomNavBar extends ConsumerWidget {
                 color: const Color(0xFF1A1A1A),
                 border: Border(
                   top: BorderSide(
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    // ignore: deprecated_member_use
+                    color: Colors.grey.withOpacity(0.2),
                     width: 1,
                   ),
                 ),
