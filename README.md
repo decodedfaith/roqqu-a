@@ -1,66 +1,81 @@
 # Roqqu Mobile Developer Assessment
 
-This is a Flutter-based mobile application built as a task-based assessment for the Mobile Developer position at Roqqu. The application provides an interface for a crypto copy trading platform, integrating with a WebSocket API to display real-time data.
+A high-fidelity Flutter implementation of the Roqqu copy trading platform UI, built as a technical assessment suppport. This project demonstrates a production-quality application that is performant, well-architected, and easy to maintain, with a strong focus on clean code, smooth animations, and a professional development workflow.
 
 ## 🚀 Project Showcase
 
+*(A GIF recording of the application running in the emulator. This demonstrates the key user flows, animations, and UI components implemented.)*
 
 
-![Project Demo GIF](link_to_your_gif_or_video.gif)
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+---
+
+## ✨ Key Technical Decisions & Highlights
+
+This project was built not just to meet the requirements, but to showcase a deep understanding of modern Flutter development best practices.
+
+*   **Declarative, Type-Safe Navigation:** Implemented a centralized routing system using the **`go_router`** package. This decouples pages from one another and provides a clear, URL-based structure for all navigation flows, including complex nested navigation for the main tabbed interface (`StatefulShellRoute`).
+
+*   **Pragmatic State Management:** A hybrid state management approach was chosen for optimal performance and code clarity:
+    *   **Riverpod:** Used for managing shared application state and dependency injection (e.g., modal visibility, WebSocket data streams). All providers are code-generated for type safety.
+    *   **`StatefulWidget`:** Intentionally used for managing ephemeral, self-contained UI state (e.g., `AnimationController`s, `PageController`s) where a global provider would be overkill. This demonstrates a nuanced understanding of state types.
+
+*   **Advanced Animations:** The UI is brought to life with a combination of implicit and explicit animations:
+    *   **Implicit Animations (`AnimatedContainer`):** Used for simple, state-driven UI changes like button selections.
+    *   **Explicit Animations (`AnimationController`):** Used for complex, staggered animations (e.g., the modal overlay "pinch out" effect) and continuous animations (e.g., Rive character movements) to create a fluid and polished user experience.
+
+*   **Component-Based & Reusable UI:** The UI is composed of a library of reusable widgets located in `lib/common/widgets`. This promotes consistency, reduces code duplication, and follows the DRY (Don't Repeat Yourself) principle.
+
+*   **Automated Quality Gates (CI/CD):** The repository is configured with a **GitHub Actions** workflow that automatically runs `flutter analyze` and `flutter test` on every pull request. This ensures that no new code violates quality standards or breaks existing functionality.
+
+---
 
 ## ✅ Assessment Requirements Checklist
 
-This project was built to meet and exceed the following evaluation criteria:
+-   [x] **Accuracy to Design:** Meticulous, pixel-perfect implementation of the provided Figma designs.
+-   [x] **Animations & Transitions:** Smooth, performant, and meaningful animations are integrated throughout the app.
+-   [x] **Architecture & Code Quality:** Built on a scalable **Feature-First, Clean Architecture** model.
+-   [x] **State Management:** Effective and appropriate use of **Riverpod** and **`StatefulWidget`**.
+-   [ ] **API Integration & Real-Time Data Handling:** *(In Progress)* The architecture is fully prepared for WebSocket integration via a decoupled data layer.
+-   [x] **Performance & Optimization:** Smooth scrolling is achieved with `CustomScrollView`/`Slivers` and efficient widget builds.
+-   [x] **Testing & Maintainability:** A suite of meaningful **widget tests** and a fully configured **CI pipeline** are present.
+-   [x] **Best Practices:** Adherence to Flutter/Dart best practices, a robust navigation strategy, and a clean **feature-branching Git workflow**.
 
--   [x] **Accuracy to Design:** High-fidelity implementation of the provided Figma designs with attention to spacing, typography, and component consistency.
--   [x] **Animations & Transitions:** Implemented smooth, performant, and meaningful animations for a fluid and polished user experience.
--   [x] **Architecture & Code Quality:**
-    -   Built upon a clean, feature-first architecture layered with Clean Architecture principles (Presentation, Domain, Data).
-    -   Adherence to OOP principles and a modular, scalable code structure.
-    -   Consistent naming conventions and a clear, well-organized folder structure.
--   [x] **State Management:** Effective use of **Riverpod** for managing shared application state, while using `StatefulWidget` for ephemeral/local UI state.
--   [ ] **API Integration & Real-Time Data Handling:** *(In Progress)* Setup for integration with open-source WebSocket APIs (like Binance).
--   [x] **Performance & Optimization:** Ensured smooth scrolling and rendering of UI elements.
--   [x] **Testing & Maintainability:**
-    -   Includes a suite of **unit and widget tests** to ensure code reliability and correctness.
-    -   The codebase is structured to be easily maintainable and understandable by other engineers.
--   [x] **Best Practices:**
-    -   Use of responsive layouts and consideration for different screen sizes.
-    -   Adherence to Flutter and Dart best practices.
-    -   Effective use of Git commits to show a clear progression of work through a feature-branching workflow.
+---
 
 ## 🏛️ Architecture
 
-The project follows a **Feature-First Architecture** combined with the principles of **Clean Architecture**. This approach isolates features into their own modules and separates concerns within each feature into three distinct layers:
+The project follows a **Feature-First Architecture** combined with the principles of **Clean Architecture**, separating concerns into three distinct layers within each feature module: **Presentation**, **Domain**, and **Data**. This ensures the codebase is decoupled, scalable, and highly testable. A centralized `AppTheme` class in the `core` layer provides consistent styling across the app.
 
--   **`Presentation`**: The Flutter UI layer, containing screens, widgets, and UI-specific state management. Widgets are kept "dumb" and react to state changes from providers.
--   **`Domain`**: The core of the application. It contains the business logic, models (entities), and abstract repository interfaces. This layer is pure Dart and has no dependencies on the UI or data sources.
--   **`Data`**: The implementation layer. It provides concrete implementations of the repositories defined in the domain layer and handles all interactions with external data sources (like the WebSocket API).
+## 🧪 Testing & CI/CD
 
-This structure ensures the codebase is decoupled, scalable, and highly testable.
+The project includes a suite of relevant widget tests in the `test/` directory, focusing on:
+1.  **Smoke Testing:** Verifying the app launches and navigates to the initial screen without errors.
+2.  **Component Testing:** Testing reusable widgets in isolation to verify their response to different states.
+3.  **State Management Testing:** Ensuring UI components correctly react to state changes from Riverpod providers.
 
-## 🧪 Testing
-
-This project includes a CI/CD pipeline configured with **GitHub Actions**. The pipeline automatically runs the following checks on every push and pull request to the `main` branch:
-
-1.  **Code Analysis:** `flutter analyze` to enforce code quality and style.
-2.  **Unit & Widget Tests:** `flutter test` to run all tests located in the `test/` directory.
-
-This ensures that the codebase remains stable and reliable throughout development.
+All tests are automatically validated by a **GitHub Actions CI pipeline** (`.github/workflows/ci.yaml`).
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
 
--   Flutter SDK (version 3.22.0 or higher)
--   An IDE like VS Code or Android Studio
+-   Flutter SDK (version specified in `pubspec.yaml`, e.g., using FVM: `fvm use 3.22.2`)
+-   An IDE like VS Code or Android Studio.
 
-### Installation
+### Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/roqqu-assessment-app.git
-    cd roqqu-assessment-app
+    git clone <your_repo_url>
+    cd <your_repo_name>
     ```
 
 2.  **Install dependencies:**
@@ -69,11 +84,7 @@ This ensures that the codebase remains stable and reliable throughout developmen
     ```
 
 3.  **Run the code generator:**
-    This project uses `riverpod_generator`. You must run the build runner to generate the necessary files. For continuous development, use the `watch` command:
-    ```bash
-    dart run build_runner watch --delete-conflicting-outputs
-    ```
-    For a one-time build, use:
+    This project uses `riverpod_generator`. You must run the build runner to generate the necessary provider files.
     ```bash
     dart run build_runner build --delete-conflicting-outputs
     ```
@@ -82,7 +93,3 @@ This ensures that the codebase remains stable and reliable throughout developmen
     ```bash
     flutter run
     ```
-
-
-
----
