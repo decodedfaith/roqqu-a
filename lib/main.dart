@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:roqqu_mobile_t/core/router/app_router.dart';
 import 'package:roqqu_mobile_t/core/theme/colors.dart';
-import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/main_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Set the system UI overlay style to make the status bar transparent.
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+  ));
   runApp(
-    // All of your app's code must be a descendant of ProviderScope.
     const ProviderScope(child: MyApp()),
   );
 }
@@ -15,8 +23,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.router,
       theme: ThemeData(
         brightness: Brightness.dark,
 
@@ -38,7 +47,6 @@ class MyApp extends StatelessWidget {
           labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
         ),
       ),
-      home: const MainScreen(),
     );
   }
 }
