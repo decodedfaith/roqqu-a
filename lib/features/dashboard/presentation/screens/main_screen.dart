@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/main_screen_providers.dart';
-import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/custom_bottom_nav_bar.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/more_for_you_sheet.dart';
-import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/page_place_holder.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
-  const MainScreen({super.key});
+  final StatefulNavigationShell navigationShell;
+  const MainScreen({
+    super.key,
+    required this.navigationShell,
+  });
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
@@ -15,13 +18,6 @@ class MainScreen extends ConsumerStatefulWidget {
 
 class _MainScreenState extends ConsumerState<MainScreen>
     with SingleTickerProviderStateMixin {
-  static const List<Widget> _pages = <Widget>[
-    HomeScreen(),
-    PagePlaceholder(title: 'Wallet Page'),
-    PagePlaceholder(title: 'History Page'),
-    PagePlaceholder(title: 'Profile Page'),
-  ];
-
   late final AnimationController _animationController;
   late final Animation<double> _containerScaleAnimation;
   late final Animation<double> _containerFadeAnimation;
@@ -85,7 +81,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
         extendBody: true,
         body: Stack(
           children: [
-            _pages[ref.watch(mainScreenIndexProvider)],
+            widget.navigationShell,
             IgnorePointer(
               ignoring: !isOverlayVisible,
               child: AnimatedOpacity(
@@ -124,7 +120,9 @@ class _MainScreenState extends ConsumerState<MainScreen>
             ),
           ],
         ),
-        bottomNavigationBar: const CustomBottomNavBar(),
+        bottomNavigationBar: CustomBottomNavBar(
+          navigationShell: widget.navigationShell,
+        ),
       ),
     );
   }

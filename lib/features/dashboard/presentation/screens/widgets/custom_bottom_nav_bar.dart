@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/main_screen_providers.dart';
+import 'package:go_router/go_router.dart';
 import 'animated_middle_button.dart';
 
-class CustomBottomNavBar extends ConsumerWidget {
-  const CustomBottomNavBar({super.key});
+class CustomBottomNavBar extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
+  const CustomBottomNavBar({
+    super.key,
+    required this.navigationShell,
+  });
+
+  void _onTap(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final selectedIndex = navigationShell.currentIndex;
+
     return SizedBox(
       height: 85,
       child: Stack(
@@ -34,27 +46,27 @@ class CustomBottomNavBar extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildNavItem(
-                    ref,
+                    selectedIndex: selectedIndex,
                     assetName: 'assets/icons/home.svg',
                     label: 'Home',
                     index: 0,
                     hasNotification: true,
                   ),
                   _buildNavItem(
-                    ref,
+                    selectedIndex: selectedIndex,
                     assetName: 'assets/icons/fintech_wallet.svg',
                     label: 'Wallet',
                     index: 1,
                   ),
                   const SizedBox(width: 40),
                   _buildNavItem(
-                    ref,
+                    selectedIndex: selectedIndex,
                     assetName: 'assets/icons/transaction.svg',
                     label: 'History',
                     index: 2,
                   ),
                   _buildNavItem(
-                    ref,
+                    selectedIndex: selectedIndex,
                     assetName: 'assets/icons/profile.svg',
                     label: 'Profile',
                     index: 3,
@@ -73,14 +85,13 @@ class CustomBottomNavBar extends ConsumerWidget {
     );
   }
 
-  Widget _buildNavItem(
-    WidgetRef ref, {
+  Widget _buildNavItem({
+    required int selectedIndex,
     required String assetName,
     required String label,
     required int index,
     bool hasNotification = false,
   }) {
-    final selectedIndex = ref.watch(mainScreenIndexProvider);
     final isSelected = selectedIndex == index;
 
     const Color activeColor = Colors.blueAccent;
@@ -97,9 +108,7 @@ class CustomBottomNavBar extends ConsumerWidget {
     );
 
     return GestureDetector(
-      onTap: () {
-        ref.read(mainScreenIndexProvider.notifier).setIndex(index);
-      },
+      onTap: () => _onTap(index),
       behavior: HitTestBehavior.opaque,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

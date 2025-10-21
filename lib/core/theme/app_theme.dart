@@ -11,6 +11,27 @@ class AppTheme {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+  // Gradient for the "My dashboard" card
+  static const LinearGradient dashboardCardGradient = LinearGradient(
+    colors: [
+      Color(0xFFABE2F3), // #ABE2F3
+      Color(0xFFBDE4E5), // #BDE4E5
+      Color(0xFFEBE9D0), // #EBE9D0
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Gradient for the "Become a PRO trader" card
+  static const LinearGradient proTraderCardGradient = LinearGradient(
+    colors: [
+      Color(0xFFC0CFFE), // #C0CFFE
+      Color(0xFFF3DFF4), // #F3DFF4
+      Color(0xFFF9D8E5), // #F9D8E5
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   static const TextTheme textTheme = TextTheme(
     headlineLarge: TextStyle(

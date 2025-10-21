@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/main_screen_providers.dart';
 
 class AnimatedMiddleButton extends ConsumerStatefulWidget {
-  const AnimatedMiddleButton({super.key});
+  const AnimatedMiddleButton({
+    super.key,
+  });
 
   @override
   ConsumerState<AnimatedMiddleButton> createState() =>
@@ -32,19 +34,12 @@ class _AnimatedMiddleButtonState extends ConsumerState<AnimatedMiddleButton>
   @override
   Widget build(BuildContext context) {
     final isOverlayVisible = ref.watch(moreForYouVisibilityProvider);
-    final isNavOnHome = ref.watch(mainScreenIndexProvider) == 0;
 
-    final bool shouldShowCloseIcon = isOverlayVisible || !isNavOnHome;
+    final bool shouldShowCloseIcon = isOverlayVisible;
 
     void handleTap() {
+      ref.read(moreForYouVisibilityProvider.notifier).toggle();
       _controller.forward().then((_) {
-        if (isOverlayVisible) {
-          ref.read(moreForYouVisibilityProvider.notifier).hide();
-        } else if (isNavOnHome) {
-          ref.read(moreForYouVisibilityProvider.notifier).show();
-        } else {
-          ref.read(mainScreenIndexProvider.notifier).setIndex(0);
-        }
         _controller.reset();
       });
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/balance_section.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/bell_icon_with_dot.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/stay_updated_section.dart';
@@ -112,7 +113,6 @@ class HomeScreen extends StatelessWidget {
                       const StayUpdatedSection(),
                       const SizedBox(height: 24),
                       const _ListedCoinsSection(),
-                      // SizedBox(height: 100),
                     ],
                   ),
                 ),
@@ -300,7 +300,7 @@ class _CopyTradingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Implement navigation to the "Intro" screen.
+        context.push('/home/pro-traders');
       },
       child: Stack(
         clipBehavior: Clip.none,
