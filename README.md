@@ -4,9 +4,8 @@ This is a Flutter-based mobile application built as a task-based assessment for 
 
 ## 🚀 Project Showcase
 
+![A GIF recording of the application running in the emulator, showcasing key user flows, animations, and UI components.](assets/video/demo.gif) 
 
-
-![Project Demo GIF](link_to_your_gif_or_video.gif)
 
 ## ✅ Assessment Requirements Checklist
 
@@ -19,7 +18,7 @@ This project was built to meet and exceed the following evaluation criteria:
     -   Adherence to OOP principles and a modular, scalable code structure.
     -   Consistent naming conventions and a clear, well-organized folder structure.
 -   [x] **State Management:** Effective use of **Riverpod** for managing shared application state, while using `StatefulWidget` for ephemeral/local UI state.
--   [ ] **API Integration & Real-Time Data Handling:** *(In Progress)* Setup for integration with open-source WebSocket APIs (like Binance).
+-   [x] **API Integration & Real-Time Data Handling:** *(In Progress)* Setup for integration with open-source WebSocket APIs (like Binance).
 -   [x] **Performance & Optimization:** Ensured smooth scrolling and rendering of UI elements.
 -   [x] **Testing & Maintainability:**
     -   Includes a suite of **unit and widget tests** to ensure code reliability and correctness.
