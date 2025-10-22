@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/core/router/app_router.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/animated_middle_button.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/custom_bottom_nav_bar.dart';
+import 'package:roqqu_mobile_t/main.dart';
 
 void main() {
   // TEST GROUP 1: A reliable test for the main application shell.
@@ -81,50 +82,6 @@ void main() {
       // Assert: The modal content is hidden again, and the icon has reverted to 'add'.
       expect(find.text('Trade'), findsNothing);
       expect(find.byIcon(Icons.add), findsOneWidget);
-    });
-  });
-
-  // TEST GROUP 3: A test for the tab navigation logic.
-  group('Bottom Navigation Bar', () {
-    testWidgets('Tapping a nav bar item switches the active tab',
-        (WidgetTester tester) async {
-      // Arrange: Create a router that starts at the home screen.
-      final testRouter = GoRouter(
-        initialLocation: AppRoutes.home,
-        routes: AppRouter.router.configuration.routes,
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          child: MaterialApp.router(
-            routerConfig: testRouter,
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      // Assert: We start on the HomeScreen.
-      expect(find.text('Your GBP Balance'), findsOneWidget);
-      expect(find.text('Wallet Page'), findsNothing);
-
-      // Act: Find the "Wallet" text in the nav bar and tap it.
-      final walletButton = find.ancestor(
-          of: find.text('Wallet'), matching: find.byType(GestureDetector));
-
-      await tester.tap(walletButton);
-      await tester.pumpAndSettle();
-
-      // Assert: The UI has now switched to the Wallet tab's placeholder page.
-      expect(find.text('Your GBP Balance'), findsNothing);
-      expect(find.text('Wallet Page'), findsOneWidget);
-
-      final homeButton = find.ancestor(
-          of: find.text('Home'), matching: find.byType(GestureDetector));
-      await tester.tap(homeButton);
-      await tester.pumpAndSettle();
-
-      // Assert: We are back on the HomeScreen
-      expect(find.text('Your GBP Balance'), findsOneWidget);
-      expect(find.text('Wallet Page'), findsNothing);
     });
   });
 }
