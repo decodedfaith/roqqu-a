@@ -107,12 +107,24 @@ void main() {
       expect(find.text('Wallet Page'), findsNothing);
 
       // Act: Find the "Wallet" text in the nav bar and tap it.
-      await tester.tap(find.text('Wallet'));
+      final walletButton = find.ancestor(
+          of: find.text('Wallet'), matching: find.byType(GestureDetector));
+
+      await tester.tap(walletButton);
       await tester.pumpAndSettle();
 
       // Assert: The UI has now switched to the Wallet tab's placeholder page.
       expect(find.text('Your GBP Balance'), findsNothing);
       expect(find.text('Wallet Page'), findsOneWidget);
+
+      final homeButton = find.ancestor(
+          of: find.text('Home'), matching: find.byType(GestureDetector));
+      await tester.tap(homeButton);
+      await tester.pumpAndSettle();
+
+      // Assert: We are back on the HomeScreen
+      expect(find.text('Your GBP Balance'), findsOneWidget);
+      expect(find.text('Wallet Page'), findsNothing);
     });
   });
 }
