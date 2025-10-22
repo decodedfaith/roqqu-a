@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/core/router/app_router.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/animated_middle_button.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/custom_bottom_nav_bar.dart';
-import 'package:roqqu_mobile_t/main.dart';
 
 void main() {
   // TEST GROUP 1: A reliable test for the main application shell.
