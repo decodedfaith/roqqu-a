@@ -70,7 +70,7 @@ class _ProTraderDetailsScreenState
               ),
             ),
           ),
-          const SliverToBoxAdapter(child: const SizedBox(height: 24)),
+          const SliverToBoxAdapter(child: SizedBox(height: 24)),
           SliverToBoxAdapter(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),

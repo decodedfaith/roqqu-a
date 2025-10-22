@@ -73,8 +73,8 @@ class ProTradersDashboard extends StatelessWidget {
       roi: 120.42,
       winRate: 100,
       isPro: true,
-      avatarColor: const Color(0xFF2E3B5D),
-      ringColor: const Color(0xFF4867D9),
+      avatarColor: Color(0xFF2E3B5D),
+      ringColor: Color(0xFF4867D9),
       id: '',
       avatarUrl: '',
       copiers: 5,
@@ -131,9 +131,7 @@ class ProTradersDashboard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Build the list of traders from the mock data
-          ...mockTraders
-              .map((trader) => ProTraderListItem(trader: trader))
-              .toList(),
+          ...mockTraders.map((trader) => ProTraderListItem(trader: trader)),
         ],
       ),
     );

@@ -33,6 +33,7 @@ class MiniPerformanceChart extends StatelessWidget {
               show: true,
               gradient: LinearGradient(
                 colors: gradientColors
+                    // ignore: deprecated_member_use
                     .map((color) => color.withOpacity(0.15))
                     .toList(),
                 begin: Alignment.topCenter,

@@ -31,6 +31,7 @@ class FrostedGlassCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: gradient,
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.2),
                 width: 1.5,
               ),

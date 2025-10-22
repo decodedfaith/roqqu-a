@@ -18,6 +18,7 @@ class TraderTabsSection extends StatelessWidget {
       height: 48,
       decoration: BoxDecoration(
         border: Border(
+          // ignore: deprecated_member_use
           bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.5),
         ),
       ),
