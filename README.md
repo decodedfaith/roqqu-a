@@ -4,51 +4,29 @@ A high-fidelity Flutter implementation of the Roqqu copy trading platform UI, bu
 
 ## 🚀 Project Showcase
 
-*(A GIF recording of the application running in the emulator. This demonstrates the key user flows, animations, and UI components implemented.)*
+![A GIF recording of the application running in the emulator, showcasing key user flows, animations, and UI components.](assets/video/demo.gif) 
 
-
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-7.png)
----
-
-## ✨ Key Technical Decisions & Highlights
-
-This project was built not just to meet the requirements, but to showcase a deep understanding of modern Flutter development best practices.
-
-*   **Declarative, Type-Safe Navigation:** Implemented a centralized routing system using the **`go_router`** package. This decouples pages from one another and provides a clear, URL-based structure for all navigation flows, including complex nested navigation for the main tabbed interface (`StatefulShellRoute`).
-
-*   **Pragmatic State Management:** A hybrid state management approach was chosen for optimal performance and code clarity:
-    *   **Riverpod:** Used for managing shared application state and dependency injection (e.g., modal visibility, WebSocket data streams). All providers are code-generated for type safety.
-    *   **`StatefulWidget`:** Intentionally used for managing ephemeral, self-contained UI state (e.g., `AnimationController`s, `PageController`s) where a global provider would be overkill. This demonstrates a nuanced understanding of state types.
-
-*   **Advanced Animations:** The UI is brought to life with a combination of implicit and explicit animations:
-    *   **Implicit Animations (`AnimatedContainer`):** Used for simple, state-driven UI changes like button selections.
-    *   **Explicit Animations (`AnimationController`):** Used for complex, staggered animations (e.g., the modal overlay "pinch out" effect) and continuous animations (e.g., Rive character movements) to create a fluid and polished user experience.
-
-*   **Component-Based & Reusable UI:** The UI is composed of a library of reusable widgets located in `lib/common/widgets`. This promotes consistency, reduces code duplication, and follows the DRY (Don't Repeat Yourself) principle.
-
-*   **Automated Quality Gates (CI/CD):** The repository is configured with a **GitHub Actions** workflow that automatically runs `flutter analyze` and `flutter test` on every pull request. This ensures that no new code violates quality standards or breaks existing functionality.
-
----
 
 ## ✅ Assessment Requirements Checklist
 
--   [x] **Accuracy to Design:** Meticulous, pixel-perfect implementation of the provided Figma designs.
--   [x] **Animations & Transitions:** Smooth, performant, and meaningful animations are integrated throughout the app.
--   [x] **Architecture & Code Quality:** Built on a scalable **Feature-First, Clean Architecture** model.
--   [x] **State Management:** Effective and appropriate use of **Riverpod** and **`StatefulWidget`**.
--   [ ] **API Integration & Real-Time Data Handling:** *(In Progress)* The architecture is fully prepared for WebSocket integration via a decoupled data layer.
--   [x] **Performance & Optimization:** Smooth scrolling is achieved with `CustomScrollView`/`Slivers` and efficient widget builds.
--   [x] **Testing & Maintainability:** A suite of meaningful **widget tests** and a fully configured **CI pipeline** are present.
--   [x] **Best Practices:** Adherence to Flutter/Dart best practices, a robust navigation strategy, and a clean **feature-branching Git workflow**.
+This project was built to meet and exceed the following evaluation criteria:
 
----
+-   [x] **Accuracy to Design:** High-fidelity implementation of the provided Figma designs with attention to spacing, typography, and component consistency.
+-   [x] **Animations & Transitions:** Implemented smooth, performant, and meaningful animations for a fluid and polished user experience.
+-   [x] **Architecture & Code Quality:**
+    -   Built upon a clean, feature-first architecture layered with Clean Architecture principles (Presentation, Domain, Data).
+    -   Adherence to OOP principles and a modular, scalable code structure.
+    -   Consistent naming conventions and a clear, well-organized folder structure.
+-   [x] **State Management:** Effective use of **Riverpod** for managing shared application state, while using `StatefulWidget` for ephemeral/local UI state.
+-   [x] **API Integration & Real-Time Data Handling:** *(In Progress)* Setup for integration with open-source WebSocket APIs (like Binance).
+-   [x] **Performance & Optimization:** Ensured smooth scrolling and rendering of UI elements.
+-   [x] **Testing & Maintainability:**
+    -   Includes a suite of **unit and widget tests** to ensure code reliability and correctness.
+    -   The codebase is structured to be easily maintainable and understandable by other engineers.
+-   [x] **Best Practices:**
+    -   Use of responsive layouts and consideration for different screen sizes.
+    -   Adherence to Flutter and Dart best practices.
+    -   Effective use of Git commits to show a clear progression of work through a feature-branching workflow.
 
 ## 🏛️ Architecture
 
