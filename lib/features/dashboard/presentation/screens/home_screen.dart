@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/balance_section.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/bell_icon_with_dot.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/listed_coin_section.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/stay_updated_section.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -112,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       const StayUpdatedSection(),
                       const SizedBox(height: 24),
-                      const _ListedCoinsSection(),
+                      const ListedCoinsSection(),
                     ],
                   ),
                 ),
@@ -379,200 +380,200 @@ class _CopyTradingCard extends StatelessWidget {
   }
 }
 
-class _ListedCoinsSection extends StatelessWidget {
-  const _ListedCoinsSection();
+// class _ListedCoinsSection extends StatelessWidget {
+//   const _ListedCoinsSection();
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: Build the "Listed Coins" section with a ListView of coin data.
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Listed Coins',
-              style: TextStyle(
-                fontFamily: 'Encode Sans',
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Color(0xFFA7B1BC),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'See all',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 10,
-                  color: Color(0xFF85D1F0),
-                  height: 1.5,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: Build the "Listed Coins" section with a ListView of coin data.
+//     return Column(
+//       children: [
+//         Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             const Text(
+//               'Listed Coins',
+//               style: TextStyle(
+//                 fontFamily: 'Encode Sans',
+//                 fontWeight: FontWeight.w700,
+//                 fontSize: 14,
+//                 color: Color(0xFFA7B1BC),
+//               ),
+//             ),
+//             TextButton(
+//               onPressed: () {},
+//               child: const Text(
+//                 'See all',
+//                 style: TextStyle(
+//                   fontFamily: 'Inter',
+//                   fontWeight: FontWeight.w400,
+//                   fontSize: 10,
+//                   color: Color(0xFF85D1F0),
+//                   height: 1.5,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 8),
 
-        //TODO:  This should be a ListView connected to real data
-        Container(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          decoration: BoxDecoration(
-            color: const Color(0xFF20252B),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF262932), width: 1),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/icons/bitcoinIcon.svg"),
-                      const SizedBox(width: 16),
-                      const Column(
-                        children: [
-                          Text(
-                            'Bitcoin',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                          Text(
-                            'BTC',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/icons/ethereumIcon.svg"),
-                      const SizedBox(width: 16),
-                      const Column(
-                        children: [
-                          Text(
-                            'Bitcoin',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                          Text(
-                            'BTC',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/icons/bitcoinIcon.svg"),
-                      const SizedBox(width: 16),
-                      const Column(
-                        children: [
-                          Text(
-                            'Bitcoin',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                          Text(
-                            'BTC',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/icons/ethereumIcon.svg"),
-                      const SizedBox(width: 16),
-                      const Column(
-                        children: [
-                          Text(
-                            'Bitcoin',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                          Text(
-                            'BTC',
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                              color: Color(0xFFA7B1BC),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Text("\$22,840", style: TextStyle(color: Colors.white)),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
+//         //TODO:  This should be a ListView connected to real data
+//         Container(
+//           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+//           decoration: BoxDecoration(
+//             color: const Color(0xFF20252B),
+//             borderRadius: BorderRadius.circular(16),
+//             border: Border.all(color: const Color(0xFF262932), width: 1),
+//           ),
+//           child: Column(
+//             children: [
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       SvgPicture.asset("assets/icons/bitcoinIcon.svg"),
+//                       const SizedBox(width: 16),
+//                       const Column(
+//                         children: [
+//                           Text(
+//                             'Bitcoin',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 14,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                           Text(
+//                             'BTC',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.w700,
+//                               fontSize: 12,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   const Text("\$22,840", style: TextStyle(color: Colors.white)),
+//                 ],
+//               ),
+//               const SizedBox(height: 16),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       SvgPicture.asset("assets/icons/ethereumIcon.svg"),
+//                       const SizedBox(width: 16),
+//                       const Column(
+//                         children: [
+//                           Text(
+//                             'Bitcoin',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 14,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                           Text(
+//                             'BTC',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.w700,
+//                               fontSize: 12,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   const Text("\$22,840", style: TextStyle(color: Colors.white)),
+//                 ],
+//               ),
+//               const SizedBox(height: 16),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       SvgPicture.asset("assets/icons/bitcoinIcon.svg"),
+//                       const SizedBox(width: 16),
+//                       const Column(
+//                         children: [
+//                           Text(
+//                             'Bitcoin',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 14,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                           Text(
+//                             'BTC',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.w700,
+//                               fontSize: 12,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   const Text("\$22,840", style: TextStyle(color: Colors.white)),
+//                 ],
+//               ),
+//               const SizedBox(height: 16),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       SvgPicture.asset("assets/icons/ethereumIcon.svg"),
+//                       const SizedBox(width: 16),
+//                       const Column(
+//                         children: [
+//                           Text(
+//                             'Bitcoin',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 14,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                           Text(
+//                             'BTC',
+//                             style: TextStyle(
+//                               fontFamily: 'Encode Sans',
+//                               fontWeight: FontWeight.w700,
+//                               fontSize: 12,
+//                               color: Color(0xFFA7B1BC),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   const Text("\$22,840", style: TextStyle(color: Colors.white)),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

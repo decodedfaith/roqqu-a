@@ -1,35 +1,88 @@
 class Coin {
   final String id;
-  final String name; // "Bitcoin"
-  final String symbol; // "BTC"
+  final String name;
+  final String symbol;
   final String imageUrl;
   final double price;
   final double priceChangePercentage;
+  final double highPrice;
+  final double lowPrice;
+  final double volume;
 
-  Coin({
+  const Coin({
     required this.id,
     required this.name,
     required this.symbol,
     required this.imageUrl,
     required this.price,
     required this.priceChangePercentage,
+    required this.highPrice,
+    required this.lowPrice,
+    required this.volume,
   });
 
   factory Coin.fromJson(Map<String, dynamic> json) {
+    final String fullSymbol = json['s'] as String;
+    final double currentPrice = double.parse(json['c'] as String);
+    final double openPrice = double.parse(json['o'] as String);
+    double priceChangePercentage = 0.0;
+    if (openPrice != 0) {
+      priceChangePercentage = ((currentPrice - openPrice) / openPrice) * 100;
+    }
     return Coin(
-      symbol:
-          (json['s'] as String).replaceAll('USDT', ''), // 'BTCUSDT' -> 'BTC'
-      price: double.parse(json['c'] as String), // Last price
-      priceChangePercentage:
-          double.parse(json['P'] as String), // Price change percent
-      id: (json['s'] as String),
-      name: _mapSymbolToName(json['s'] as String),
-      imageUrl: _mapSymbolToImageUrl(json['s'] as String),
+      id: fullSymbol,
+      symbol: fullSymbol.replaceAll('USDT', ''),
+      price: currentPrice,
+      priceChangePercentage: priceChangePercentage,
+      highPrice: double.parse(json['h'] as String),
+      lowPrice: double.parse(json['l'] as String),
+      volume: double.parse(json['v'] as String),
+      name: _mapSymbolToName(fullSymbol),
+      imageUrl:
+          _mapSymbolToImageUrl(fullSymbol), // This will now work correctly
     );
   }
 
-  // Helper methods to map symbols to full names/images
-  static String _mapSymbolToName(String symbol) =>
-      'Bitcoin'; //TODO:  Simplified for example
-  static String _mapSymbolToImageUrl(String symbol) => 'aa';
+  // Helper for names remains the same
+  static String _mapSymbolToName(String symbol) {
+    switch (symbol) {
+      case 'BTCUSDT':
+        return 'Bitcoin';
+      case 'ETHUSDT':
+        return 'Ethereum';
+      case 'BNBUSDT':
+        return 'BNB';
+      case 'SOLUSDT':
+        return 'Solana';
+      case 'XRPUSDT':
+        return 'XRP';
+      case 'DOGEUSDT':
+        return 'Dogecoin';
+      default:
+        return symbol.replaceAll('USDT', '');
+    }
+  }
+
+  // --- THIS IS THE FINAL, CORRECTED HELPER METHOD ---
+  static String _mapSymbolToImageUrl(String symbol) {
+    // We map the symbol from the API (e.g., 'BTCUSDT') to the exact
+    // filename you have in your 'assets/icons/' folder.
+    switch (symbol) {
+      case 'BTCUSDT':
+        return 'assets/icons/bitcoinIcon.svg';
+      case 'ETHUSDT':
+        return 'assets/icons/ethereumIcon.svg';
+      case 'BNBUSDT':
+        return 'assets/icons/bnbIcon.svg';
+      case 'SOLUSDT':
+        return 'assets/icons/solIcon.svg';
+      case 'XRPUSDT':
+        return 'assets/icons/xrp-icon.svg';
+      case 'DOGEUSDT':
+        return 'assets/icons/doge-icon.svg';
+
+      default:
+        return 'assets/icons/orbIce.svg';
+    }
+  }
 }
