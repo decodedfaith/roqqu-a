@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/core/router/app_router.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/coin_providers.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/animated_middle_button.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/custom_bottom_nav_bar.dart';
 
@@ -11,31 +12,34 @@ void main() {
   group('MainScreen and Navigation Shell', () {
     testWidgets('MainScreen launches on the home tab without crashing',
         (WidgetTester tester) async {
-      // Arrange: Create a special router instance for this test that starts
-      // directly at the home screen, bypassing the onboarding flow.
+      // Arrange: Create a test router starting at the home screen
       final testRouter = GoRouter(
         initialLocation: AppRoutes.home,
         routes: AppRouter.router.configuration.routes,
       );
 
-      // Act: Pump a MaterialApp.router with our test-specific router.
+      // Mock the coinList provider with a completed stream
       await tester.pumpWidget(
         ProviderScope(
+          overrides: [
+            coinListProvider.overrideWith((ref) {
+              return Stream.value([]); // Simulate an empty but loaded stream
+            }),
+          ],
           child: MaterialApp.router(
             routerConfig: testRouter,
           ),
         ),
       );
-      // Wait for any initial animations or frame settling.
+
+      // Act: Pump the widget tree and wait for stability
+      await tester.pump();
       await tester.pumpAndSettle();
 
-      // Assert: Verify that key components of the main UI are present.
-      // This is a powerful "smoke test" for the main part of your app.
+      // Assert: Verify key UI components
       expect(find.byType(CustomBottomNavBar), findsOneWidget);
-      expect(find.text('Home'),
-          findsOneWidget); // Checks for the "Home" nav bar item
-      expect(find.text('Your GBP Balance'),
-          findsOneWidget); // Checks for content from HomeScreen
+      expect(find.text('Home'), findsOneWidget);
+      expect(find.text('Your GBP Balance'), findsOneWidget);
     });
   });
 
@@ -43,42 +47,45 @@ void main() {
   group('Dashboard Modal Overlay', () {
     testWidgets('Tapping the middle button shows and hides the modal overlay',
         (WidgetTester tester) async {
-      // Arrange: Create a router that starts at the home screen.
+      // Arrange: Create a router starting at the home screen
       final testRouter = GoRouter(
         initialLocation: AppRoutes.home,
         routes: AppRouter.router.configuration.routes,
       );
 
-      // Act: Pump the app.
+      // Mock the coinList provider
       await tester.pumpWidget(
         ProviderScope(
+          overrides: [
+            coinListProvider.overrideWith((ref) {
+              return Stream.value([]);
+            }),
+          ],
           child: MaterialApp.router(
             routerConfig: testRouter,
           ),
         ),
       );
+      await tester.pump();
       await tester.pumpAndSettle();
 
-      // Assert: We are on the Dashboard. Initially, the modal content is not visible,
-      // and the button shows an 'add' icon.
-      expect(find.text('Trade'),
-          findsNothing); // 'Trade' is a title in MoreForYouSheet
+      // Assert: Initially, modal content is not visible, and button shows 'add'
+      expect(find.text('Trade'), findsNothing);
       expect(find.byIcon(Icons.add), findsOneWidget);
 
-      // Act: Find the middle button and tap it to show the modal.
+      // Act: Tap the middle button to show the modal
       await tester.tap(find.byType(AnimatedMiddleButton));
-      // pumpAndSettle waits for the slide-up/scale-up animation to complete.
       await tester.pumpAndSettle();
 
-      // Assert: The modal content is now visible, and the button shows a 'close' icon.
+      // Assert: Modal content is visible, and button shows 'close'
       expect(find.text('Trade'), findsOneWidget);
       expect(find.byIcon(Icons.close), findsOneWidget);
 
-      // Act: Tap the middle button again to hide the modal.
+      // Act: Tap the middle button again to hide the modal
       await tester.tap(find.byType(AnimatedMiddleButton));
       await tester.pumpAndSettle();
 
-      // Assert: The modal content is hidden again, and the icon has reverted to 'add'.
+      // Assert: Modal content is hidden, and icon reverts to 'add'
       expect(find.text('Trade'), findsNothing);
       expect(find.byIcon(Icons.add), findsOneWidget);
     });
