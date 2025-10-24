@@ -1,5 +1,4 @@
 # .github/workflows/ci.yaml
-
 name: Flutter CI
 
 on:
@@ -20,9 +19,14 @@ jobs:
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.25.1'
+          flutter-version: '3.35.1'  # Or 3.25.1 if that's your intended version
           channel: 'stable'
+          architecture: 'x64'  # Explicitly set for clarity
+          git-source: 'https://github.com/flutter/flutter.git'  # Key fix: Direct Git clone
           cache: true
+
+      - name: 🐛 Debug Flutter Version (Optional)
+        run: flutter --version && dart --version  # Add this to confirm in logs
 
       - name: 📦 Install dependencies
         run: flutter pub get
