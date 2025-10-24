@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:roqqu_mobile_t/features/dashboard/domain/models/coin.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
