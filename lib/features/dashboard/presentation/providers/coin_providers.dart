@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:roqqu_mobile_t/features/dashboard/domain/models/coin.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -11,7 +12,7 @@ part 'coin_providers.g.dart'; // Ensure this line is present and correct
 /// The main provider for the UI's coin list.
 /// It manages the WebSocket connection and provides a stream of updated coin data.
 @riverpod
-Stream<List<Coin>> coinList(ref) {
+Stream<List<Coin>> coinList(Ref ref) {
   // Use a broadcast controller so the stream can be listened to multiple times if needed,
   // though Riverpod's caching makes this less critical.
   final controller = StreamController<List<Coin>>.broadcast();
