@@ -12,7 +12,7 @@ part 'coin_providers.g.dart'; // Ensure this line is present and correct
 /// The main provider for the UI's coin list.
 /// It manages the WebSocket connection and provides a stream of updated coin data.
 @riverpod
-Stream<List<Coin>> coinList(Ref ref) {
+Stream<List<Coin>> coinList(ref) {
   // Use a broadcast controller so the stream can be listened to multiple times if needed,
   // though Riverpod's caching makes this less critical.
   final controller = StreamController<List<Coin>>.broadcast();
