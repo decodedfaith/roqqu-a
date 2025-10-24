@@ -4,7 +4,7 @@ A high-fidelity Flutter implementation of the Roqqu copy trading platform UI, bu
 
 ## 🚀 Project Showcase
 
-![A GIF recording of the application running in the emulator, showcasing key user flows, animations, and UI components.](assets/video/demo.gif) 
+![A GIF recording of the application running in the emulator, showcasing key user flows, animations, and UI components.](assets/video/demo2.gif) 
 
 
 ## ✅ Assessment Requirements Checklist
