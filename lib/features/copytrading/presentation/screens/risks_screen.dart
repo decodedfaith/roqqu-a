@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/common/widgets/custom_app_bar.dart';
 import 'package:roqqu_mobile_t/common/widgets/main_gradient_button.dart';
 import 'package:roqqu_mobile_t/core/theme/app_theme.dart';
@@ -47,7 +48,9 @@ class RisksScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
           child: MainGradientButton(
             text: 'I have read the risks',
-            onPressed: () {},
+            onPressed: () {
+              context.push('/enter-amount');
+            },
           ),
         ),
       ),
