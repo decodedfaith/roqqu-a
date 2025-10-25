@@ -14,6 +14,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange: Create a test router starting at the home screen
       final testRouter = GoRouter(
+        navigatorKey: AppRouter.rootNavigatorKey,
         initialLocation: AppRoutes.home,
         routes: AppRouter.router.configuration.routes,
       );
@@ -49,6 +50,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange: Create a router starting at the home screen
       final testRouter = GoRouter(
+        navigatorKey: AppRouter.rootNavigatorKey,
         initialLocation: AppRoutes.home,
         routes: AppRouter.router.configuration.routes,
       );

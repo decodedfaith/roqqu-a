@@ -31,11 +31,11 @@ class AppRoutes {
 }
 
 class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.home,
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: true,
 
     // Redirect logic for onboarding (uncomment when ready)
@@ -56,6 +56,7 @@ class AppRouter {
       // Onboarding Flow
       GoRoute(
         path: AppRoutes.copyTrading,
+        parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CopyTradingScreen(),
       ),
       GoRoute(
@@ -64,7 +65,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.risks,
-        parentNavigatorKey: _rootNavigatorKey,
+        parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const RisksScreen(),
       ),
 
