@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:roqqu_mobile_t/common/widgets/custom_app_bar.dart';
 import 'package:roqqu_mobile_t/common/widgets/main_gradient_button.dart';
 import 'package:roqqu_mobile_t/core/theme/app_theme.dart';
+import 'package:roqqu_mobile_t/features/copytrading/presentation/widgets/important_message_sheet.dart';
 import 'package:roqqu_mobile_t/features/pro_traders/domain/models/pro_trader.dart';
 import 'package:roqqu_mobile_t/features/pro_traders/presentation/widgets/certified_pro_trader_section.dart';
 import 'package:roqqu_mobile_t/features/pro_traders/presentation/widgets/trader_header_section.dart';
@@ -85,7 +86,14 @@ class _ProTraderDetailsScreenState
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
           child: MainGradientButton(
             text: 'Copy trade',
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) => const ImportantMessageSheet(),
+              );
+            },
           ),
         ),
       ),
@@ -94,9 +102,9 @@ class _ProTraderDetailsScreenState
 
   Widget _buildTabContent(int index) {
     switch (index) {
-      case 1: // Stats
+      case 1:
         return const TraderStatsSection();
-      case 2: // All Trades
+      case 2:
         return const Center(
             child: Text('All Trades Coming Soon',
                 style: TextStyle(color: Colors.white)));
