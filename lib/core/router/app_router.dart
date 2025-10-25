@@ -8,6 +8,10 @@ import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/p
 import 'package:roqqu_mobile_t/features/pro_traders/presentation/screens/pro_trader_details.dart';
 import 'package:roqqu_mobile_t/features/pro_traders/presentation/screens/pro_traders_dashboard.dart';
 import 'package:roqqu_mobile_t/features/risk_assessment/presentation/screens/risk_level_screen.dart';
+import 'package:roqqu_mobile_t/features/transaction/presentation/screens/confirm_copy_screen.dart';
+import 'package:roqqu_mobile_t/features/transaction/presentation/screens/copy_success_screen.dart';
+import 'package:roqqu_mobile_t/features/transaction/presentation/screens/enter_amount_screen.dart';
+import 'package:roqqu_mobile_t/features/transaction/presentation/screens/enter_pin_screen.dart';
 
 class AppRoutes {
   // Initial Setup Flow
@@ -19,6 +23,10 @@ class AppRoutes {
   static const wallet = '/wallet';
   static const history = '/history';
   static const profile = '/profile';
+  static const enterAmount = '/enter-amount';
+  static const confirmCopy = '/confirm-copy';
+  static const enterPin = '/enter-pin';
+  static const copySuccess = '/copy-success';
 
   // Sub-routes under Home
   static const proTraders = 'pro-traders'; // Relative path: /home/pro-traders
@@ -67,6 +75,26 @@ class AppRouter {
         path: AppRoutes.risks,
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const RisksScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enterAmount,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const EnterAmountScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.confirmCopy,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ConfirmCopyScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enterPin,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const EnterPinScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.copySuccess,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const CopySuccessScreen(),
       ),
 
       // Main App with Tabs
