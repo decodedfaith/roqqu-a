@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/copy_trading_screen.dart';
+import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/risks_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/main_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/page_place_holder.dart';
@@ -23,17 +24,18 @@ class AppRoutes {
   static const proTraders = 'pro-traders'; // Relative path: /home/pro-traders
   static const traderDetails =
       'details'; // Relative path: /home/pro-traders/details/:traderId
+  static const risks = '/risks';
 
   // Other Top-Level Routes
   static const confirmTransaction = '/confirm-transaction';
 }
 
 class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.home,
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: true,
 
     // Redirect logic for onboarding (uncomment when ready)
@@ -54,11 +56,17 @@ class AppRouter {
       // Onboarding Flow
       GoRoute(
         path: AppRoutes.copyTrading,
+        parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CopyTradingScreen(),
       ),
       GoRoute(
         path: AppRoutes.riskAssessment,
         builder: (context, state) => const RiskLevelScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.risks,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const RisksScreen(),
       ),
 
       // Main App with Tabs
