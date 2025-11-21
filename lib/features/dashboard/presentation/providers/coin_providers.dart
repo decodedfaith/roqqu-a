@@ -23,44 +23,38 @@ Stream<List<Coin>> coinList(ref) {
   StreamSubscription? channelSubscription;
 
   // --- The main logic for connecting and listening ---
-  void connect() {
+  Future<void> connect() async {
     try {
-      print(
-          "--- [DEBUG] Attempting to connect to wss://stream.binance.com:9443/ws ---");
       channel = WebSocketChannel.connect(
         Uri.parse('wss://stream.binance.com:9443/ws'),
       );
 
       // Wait for the connection to be ready before subscribing
-      channel!.ready.then((_) {
-        print("--- [DEBUG] WebSocket connection READY. Subscribing... ---");
+      await channel!.ready;
 
-        // The list of coins to watch
-        final symbolsToWatch = [
-          "btcusdt@miniTicker",
-          "ethusdt@miniTicker",
-          "bnbusdt@miniTicker",
-          "solusdt@miniTicker",
-          "xrpusdt@miniTicker",
-          "dogeusdt@miniTicker",
-          "adausdt@miniTicker",
-          "maticusdt@miniTicker",
-        ];
-        final subscriptionMessage = {
-          "method": "SUBSCRIBE",
-          "params": symbolsToWatch,
-          "id": 1
-        };
+      // The list of coins to watch
+      final symbolsToWatch = [
+        "btcusdt@miniTicker",
+        "ethusdt@miniTicker",
+        "bnbusdt@miniTicker",
+        "solusdt@miniTicker",
+        "xrpusdt@miniTicker",
+        "dogeusdt@miniTicker",
+        "adausdt@miniTicker",
+        "maticusdt@miniTicker",
+      ];
+      final subscriptionMessage = {
+        "method": "SUBSCRIBE",
+        "params": symbolsToWatch,
+        "id": 1
+      };
 
-        channel!.sink.add(jsonEncode(subscriptionMessage));
-        print("--- [DEBUG] Subscription message sent. ---");
-      });
+      channel!.sink.add(jsonEncode(subscriptionMessage));
 
       // Listen to the stream for incoming messages
       channelSubscription = channel!.stream.listen(
         (message) {
           try {
-            print("--- [DEBUG] RAW DATA RECEIVED: $message ---");
             final data = jsonDecode(message);
 
             if (data is Map<String, dynamic> && data['e'] == '24hrMiniTicker') {
@@ -83,34 +77,31 @@ Stream<List<Coin>> coinList(ref) {
               controller.add(list);
             }
           } catch (e) {
-            print("--- [DEBUG] ERROR PARSING MESSAGE: $e ---");
+            // Handle error silently or log to a proper logger
           }
         },
         onError: (error) {
-          print("--- [DEBUG] WEB SOCKET STREAM ERROR: $error ---");
-          controller.addError(error);
+          // Attempt to reconnect on error
+          _reconnect(ref);
         },
         onDone: () {
-          print("--- [DEBUG] WEB SOCKET DONE (Connection Closed) ---");
-          controller.close(); // Close the controller when the socket closes
+          // Attempt to reconnect when connection closes
+          _reconnect(ref);
         },
-        cancelOnError:
-            true, // It's often safer to close the stream on an unrecoverable error
+        cancelOnError: true,
       );
     } catch (e) {
-      print("--- [DEBUG] FATAL CONNECTION ERROR: $e ---");
-      controller.addError(e);
+      // Attempt to reconnect on connection failure
+      _reconnect(ref);
     }
   }
 
   // --- Start the connection process ---
   connect();
 
-  // --- Riverpod's lifecycle management ---
   // This is the most important part. It ensures everything is cleaned up
   // when the provider is no longer being listened to.
   ref.onDispose(() {
-    print("--- [DEBUG] Provider disposing. Cleaning up resources. ---");
     channelSubscription?.cancel();
     channel?.sink.close();
     controller.close();
@@ -118,4 +109,15 @@ Stream<List<Coin>> coinList(ref) {
 
   // Return the stream from our controller for the UI to listen to.
   return controller.stream;
+}
+
+void _reconnect(dynamic ref) {
+  // Simple exponential backoff or fixed delay could be used here.
+  // For now, we'll just wait 5 seconds and try to invalidate the provider
+  // to trigger a rebuild/reconnect.
+  Future.delayed(const Duration(seconds: 5), () {
+    // Invalidate the provider to force a re-execution of the provider body,
+    // which will call connect() again.
+    ref.invalidate(coinListProvider);
+  });
 }
