@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:roqqu_mobile_t/core/utils/app_assets.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/balance_section.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/bell_icon_with_dot.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/listed_coin_section.dart';
@@ -49,19 +50,19 @@ class HomeScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   _ActionButton(
-                                    assetName: 'assets/icons/deposit.svg',
+                                    assetName: AppAssets.deposit,
                                     label: 'Deposit',
                                   ),
                                   _ActionButton(
-                                    assetName: 'assets/icons/buy.svg',
+                                    assetName: AppAssets.buy,
                                     label: 'Buy',
                                   ),
                                   _ActionButton(
-                                    assetName: 'assets/icons/withdraw.svg',
+                                    assetName: AppAssets.withdraw,
                                     label: 'Withdraw',
                                   ),
                                   _ActionButton(
-                                    assetName: 'assets/icons/send.svg',
+                                    assetName: AppAssets.send,
                                     label: 'Send',
                                   ),
                                 ],
@@ -198,16 +199,16 @@ class _HeaderContent extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        SvgPicture.asset("assets/icons/search.svg"),
-                        const SizedBox(width: 16),
-                        SvgPicture.asset("assets/icons/headphones.svg"),
-                        const SizedBox(width: 16),
-                        const BellIconWithDot(
-                          svgIcon: "assets/icons/bNotification.svg",
-                          blackOutline: true,
-                        ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(AppAssets.search),
+                          const SizedBox(width: 16),
+                          SvgPicture.asset(AppAssets.headphones),
+                          const SizedBox(width: 16),
+                          const BellIconWithDot(
+                            svgIcon: AppAssets.notification,
+                            blackOutline: true,
+                          ),
                         const SizedBox(width: 16),
                         Container(
                           padding: const EdgeInsets.all(6),
@@ -372,7 +373,7 @@ class _CopyTradingCard extends StatelessWidget {
           Positioned(
             right: 8,
             bottom: -2,
-            child: SvgPicture.asset('assets/icons/crown.svg', height: 85),
+            child: SvgPicture.asset(AppAssets.crown, height: 85),
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'package:roqqu_mobile_t/core/utils/app_assets.dart';
+
 class Coin {
   final String id;
   final String name;
@@ -69,20 +71,20 @@ class Coin {
     // filename you have in your 'assets/icons/' folder.
     switch (symbol) {
       case 'BTCUSDT':
-        return 'assets/icons/bitcoinIcon.svg';
+        return AppAssets.bitcoinIcon;
       case 'ETHUSDT':
-        return 'assets/icons/ethereumIcon.svg';
+        return AppAssets.ethereumIcon;
       case 'BNBUSDT':
-        return 'assets/icons/bnbIcon.svg';
+        return AppAssets.bnbIcon;
       case 'SOLUSDT':
-        return 'assets/icons/solIcon.svg';
+        return AppAssets.solIcon;
       case 'XRPUSDT':
-        return 'assets/icons/xrp-icon.svg';
+        return AppAssets.xrpIcon;
       case 'DOGEUSDT':
-        return 'assets/icons/doge-icon.svg';
+        return AppAssets.dogeIcon;
 
       default:
-        return 'assets/icons/orbIce.svg';
+        return AppAssets.orbIce;
     }
   }
 }

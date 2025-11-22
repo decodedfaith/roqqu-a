@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/core/theme/app_theme.dart';
 import 'package:roqqu_mobile_t/features/dashboard/domain/models/coin.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/providers/coin_providers.dart';
@@ -14,10 +15,6 @@ class ListedCoinsSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 2. Watch the provider. The UI will now react to its state changes.
     final coinListAsync = ref.watch(coinListProvider);
-
-    // --- ADD THIS DEBUG PRINT STATEMENT ---
-    print(
-        "--- [DEBUG] ListedCoinsSection rebuilt. State is: $coinListAsync ---");
 
     return Column(
       children: [
@@ -48,8 +45,6 @@ class ListedCoinsSection extends ConsumerWidget {
           ),
           child: coinListAsync.when(
             loading: () {
-              print("--- [DEBUG] UI State: LOADING ---");
-
               return const Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 48.0),
@@ -58,8 +53,6 @@ class ListedCoinsSection extends ConsumerWidget {
               );
             },
             error: (err, stack) {
-              print("--- [DEBUG] UI State: ERROR - $err ---");
-
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -69,9 +62,6 @@ class ListedCoinsSection extends ConsumerWidget {
               );
             },
             data: (coins) {
-              print(
-                  "--- [DEBUG] UI State: DATA RECEIVED with ${coins.length} coins ---");
-
               if (coins.isEmpty) {
                 return const Center(
                   child: Padding(
@@ -117,6 +107,9 @@ class _CoinListItem extends StatelessWidget {
     final bool isPositive = coin.priceChangePercentage >= 0;
 
     return ListTile(
+      onTap: () {
+        context.push('/home/coin-details', extra: coin);
+      },
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       leading: SvgPicture.asset(

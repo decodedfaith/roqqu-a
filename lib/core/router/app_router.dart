@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/copy_trading_screen.dart';
 import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/risks_screen.dart';
+import 'package:roqqu_mobile_t/features/dashboard/domain/models/coin.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/coin_detail_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/main_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/page_place_holder.dart';
@@ -32,6 +34,7 @@ class AppRoutes {
   static const proTraders = 'pro-traders'; // Relative path: /home/pro-traders
   static const traderDetails =
       'details'; // Relative path: /home/pro-traders/details/:traderId
+  static const coinDetails = 'coin-details'; // Relative path: /home/coin-details
   static const risks = '/risks';
 
   // Other Top-Level Routes
@@ -128,6 +131,15 @@ class AppRouter {
                         ),
                       ),
                     ],
+                  ),
+                  // Coin Details (sub-route of Home)
+                  GoRoute(
+                    path: AppRoutes.coinDetails,
+                    builder: (c, s) {
+                      // Extract the coin object from extra
+                      final coin = s.extra as Coin;
+                      return CoinDetailScreen(coin: coin);
+                    },
                   ),
                 ],
               ),
