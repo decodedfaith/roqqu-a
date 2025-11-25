@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:roqqu_mobile_t/core/constants/app_strings.dart';
+import 'package:roqqu_mobile_t/core/theme/colors.dart';
+import 'package:roqqu_mobile_t/core/theme/typography.dart';
 import 'package:roqqu_mobile_t/core/utils/app_assets.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/balance_section.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/widgets/bell_icon_with_dot.dart';
@@ -13,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C2127),
+      backgroundColor: AppColors.background,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -33,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 16),
                         height: 100,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF262932),
+                          color: AppColors.cardBackground,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Padding(
@@ -51,19 +54,19 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   _ActionButton(
                                     assetName: AppAssets.deposit,
-                                    label: 'Deposit',
+                                    label: AppStrings.deposit,
                                   ),
                                   _ActionButton(
                                     assetName: AppAssets.buy,
-                                    label: 'Buy',
+                                    label: AppStrings.buy,
                                   ),
                                   _ActionButton(
                                     assetName: AppAssets.withdraw,
-                                    label: 'Withdraw',
+                                    label: AppStrings.withdraw,
                                   ),
                                   _ActionButton(
                                     assetName: AppAssets.send,
-                                    label: 'Send',
+                                    label: AppStrings.send,
                                   ),
                                 ],
                               ),
@@ -73,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Container(
                         decoration: const BoxDecoration(
-                          color: Color(0xFF262932),
+                          color: AppColors.cardBackground,
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(11),
                             bottomRight: Radius.circular(11),
@@ -82,15 +85,12 @@ class HomeScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 30,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.push('/home/all-coins');
+                            },
                             child: const Text(
-                              'See more',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 11,
-                                color: Color(0xFF85D1F0),
-                              ),
+                              AppStrings.seeMore,
+                              style: AppTypography.bodySmall,
                             ),
                           ),
                         ),
@@ -101,13 +101,8 @@ class HomeScreen extends StatelessWidget {
                       const Row(
                         children: [
                           Text(
-                            "Stay Updated",
-                            style: TextStyle(
-                              fontFamily: 'Encode Sans',
-                              fontWeight: FontWeight.w900,
-                              fontSize: 14,
-                              color: Color(0xFFA7B1BC),
-                            ),
+                            AppStrings.stayUpdated,
+                            style: AppTypography.titleMedium,
                           ),
                         ],
                       ),
@@ -143,11 +138,7 @@ class _HeaderContent extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFC0CFFE),
-                  Color(0xFFF3DFF4),
-                  Color(0xFFF9D8E5),
-                ],
+                colors: AppColors.proTraderGradient,
               ),
             ),
           ),
@@ -162,7 +153,7 @@ class _HeaderContent extends StatelessWidget {
                       padding: const EdgeInsets.all(2.5),
                       decoration: BoxDecoration(
                         // ignore: deprecated_member_use
-                        color: Colors.grey.withOpacity(0.3),
+                        color: Colors.grey.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
@@ -172,18 +163,14 @@ class _HeaderContent extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           // ignore: deprecated_member_use
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Row(
                           children: [
                             Text(
-                              'Crypto',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
+                              AppStrings.crypto,
+                              style: AppTypography.cryptoLabel,
                             ),
                             SizedBox(width: 8),
                             SizedBox(
@@ -191,7 +178,7 @@ class _HeaderContent extends StatelessWidget {
                               child: Icon(
                                 Icons.keyboard_arrow_down,
                                 size: 20,
-                                color: Colors.black87,
+                                color: AppColors.textBlack,
                               ),
                             ),
                             SizedBox(width: 8),
@@ -199,22 +186,22 @@ class _HeaderContent extends StatelessWidget {
                         ),
                       ),
                     ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(AppAssets.search),
-                          const SizedBox(width: 16),
-                          SvgPicture.asset(AppAssets.headphones),
-                          const SizedBox(width: 16),
-                          const BellIconWithDot(
-                            svgIcon: AppAssets.notification,
-                            blackOutline: true,
-                          ),
+                    Row(
+                      children: [
+                        SvgPicture.asset(AppAssets.search),
+                        const SizedBox(width: 16),
+                        SvgPicture.asset(AppAssets.headphones),
+                        const SizedBox(width: 16),
+                        const BellIconWithDot(
+                          svgIcon: AppAssets.notification,
+                          blackOutline: true,
+                        ),
                         const SizedBox(width: 16),
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                             // ignore: deprecated_member_use
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Row(
@@ -224,7 +211,7 @@ class _HeaderContent extends StatelessWidget {
                               Icon(
                                 Icons.keyboard_arrow_down,
                                 size: 18,
-                                color: Colors.black54,
+                                color: AppColors.textBlack54,
                               ),
                             ],
                           ),
@@ -237,7 +224,7 @@ class _HeaderContent extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
                 decoration: const BoxDecoration(
-                  color: Color(0xFF1C2127),
+                  color: AppColors.background,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
                     topRight: Radius.circular(24),
@@ -266,7 +253,7 @@ class _ActionButton extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-            color: Color(0xFF1C2127),
+            color: AppColors.background,
             shape: BoxShape.circle,
           ),
           child: SvgPicture.asset(
@@ -274,7 +261,7 @@ class _ActionButton extends StatelessWidget {
             width: 15,
             height: 15,
             colorFilter: const ColorFilter.mode(
-              Colors.white70,
+              AppColors.white70,
               BlendMode.srcIn,
             ),
           ),
@@ -282,13 +269,7 @@ class _ActionButton extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color(0xFFA7B1BC),
-            height: 1.5,
-          ),
+          style: AppTypography.buttonLabel,
         ),
       ],
     );
@@ -314,11 +295,7 @@ class _CopyTradingCard extends StatelessWidget {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFFEC536),
-                  Color(0xFF98AAFE),
-                  Color(0xFF6179FA),
-                ],
+                colors: AppColors.copyTradingGradient1,
               ),
             ),
             child: Container(
@@ -328,44 +305,29 @@ class _CopyTradingCard extends StatelessWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFABE2F3),
-                    Color(0xFFBDE4E5),
-                    Color(0xFFEBE9D0),
-                  ],
+                  colors: AppColors.copyTradingGradient2,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Copy Trading',
-                          style: TextStyle(
-                            fontFamily: 'Encode Sans',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: Color(0xFF1C2127),
-                            height: 1.5,
-                          ),
+                        const Text(
+                          AppStrings.copyTrading,
+                          style: AppTypography.titleLarge,
                         ),
                         Text(
-                          'Discover our latest feature. Follow and watch the PRO traders closely and win like a PRO! We are rooting for you!',
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(0xFF1C2127),
-                            height: 1.5,
-                          ),
+                          AppStrings.copyTradingDesc,
+                          style: AppTypography.buttonLabel
+                              .copyWith(color: AppColors.textBlack),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(width: 100),
+                  const SizedBox(width: 100),
                 ],
               ),
             ),
