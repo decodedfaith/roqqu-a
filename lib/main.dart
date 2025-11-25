@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: AppColors.background,
 
-        primaryColor: AppColors.primaryText,
+        primaryColor: AppColors.primaryPurple,
 
         fontFamily: 'Inter',
         colorScheme: const ColorScheme.dark(
-          primary: AppColors.primary,
-          onSurface: AppColors.primaryText,
-          surface: AppColors.surface,
+          primary: AppColors.primaryPurple,
+          onSurface: AppColors.textPrimary,
+          surface: AppColors.cardBackground,
         ),
 
         // Define global text styles to ensure consistency.
