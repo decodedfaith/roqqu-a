@@ -27,7 +27,9 @@ class ListedCoinsSection extends ConsumerWidget {
                   ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push('/home/all-coins');
+              },
               child: const Text(
                 'See all',
                 style: TextStyle(
@@ -84,8 +86,22 @@ class ListedCoinsSection extends ConsumerWidget {
                     endIndent: 16),
                 itemBuilder: (context, index) {
                   final coin = coins[index];
-                  // Use the reusable _CoinListItem widget
-                  return _CoinListItem(coin: coin);
+                  // Use the reusable _CoinListItem widget with animation
+                  return TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    duration: Duration(milliseconds: 400 + (index * 100)),
+                    curve: Curves.easeOutQuad,
+                    builder: (context, value, child) {
+                      return Transform.translate(
+                        offset: Offset(0, 10 * (1 - value)),
+                        child: Opacity(
+                          opacity: value,
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: _CoinListItem(coin: coin),
+                  );
                 },
               );
             },
