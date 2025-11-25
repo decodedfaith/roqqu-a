@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/copy_trading_screen.dart';
 import 'package:roqqu_mobile_t/features/copytrading/presentation/screens/risks_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/domain/models/coin.dart';
+import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/all_coins_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/coin_detail_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:roqqu_mobile_t/features/dashboard/presentation/screens/main_screen.dart';
@@ -34,7 +35,9 @@ class AppRoutes {
   static const proTraders = 'pro-traders'; // Relative path: /home/pro-traders
   static const traderDetails =
       'details'; // Relative path: /home/pro-traders/details/:traderId
-  static const coinDetails = 'coin-details'; // Relative path: /home/coin-details
+  static const coinDetails =
+      'coin-details'; // Relative path: /home/coin-details
+  static const allCoins = 'all-coins'; // Relative path: /home/all-coins
   static const risks = '/risks';
 
   // Other Top-Level Routes
@@ -140,6 +143,11 @@ class AppRouter {
                       final coin = s.extra as Coin;
                       return CoinDetailScreen(coin: coin);
                     },
+                  ),
+                  // All Coins (sub-route of Home)
+                  GoRoute(
+                    path: AppRoutes.allCoins,
+                    builder: (c, s) => const AllCoinsScreen(),
                   ),
                 ],
               ),
